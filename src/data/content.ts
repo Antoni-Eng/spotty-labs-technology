@@ -71,3 +71,9 @@ export const ABOUT = {
     'Teaching is part of the same job. Computer education here means sitting with the problem until it is clear enough to pass on — so the skill stays with you, not with the lab.',
   ],
 } as const
+
+export const CONTACT_INTRO = {
+  eyebrow: 'Start a conversation',
+  title: 'What can we build together?',
+  support: 'A short note is enough — name, email, and what you have in mind.',
+} as const

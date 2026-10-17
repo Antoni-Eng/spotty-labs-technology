@@ -28,6 +28,12 @@
   line-height: 0.98;
 }
 
+.contact__support {
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
+
 .contact__form {
   display: grid;
   gap: 1.25rem;

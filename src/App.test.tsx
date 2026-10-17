@@ -1,6 +1,6 @@
 import { act, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { ABOUT, BRAND, HERO, HOME_TEASERS, SERVICES, SERVICES_INTRO } from './data/content'
+import { ABOUT, BRAND, CONTACT_INTRO, HERO, HOME_TEASERS, SERVICES, SERVICES_INTRO } from './data/content'
 import { renderApp } from './test/renderApp'
 
 let intersectionCallback: IntersectionObserverCallback
@@ -124,5 +124,18 @@ describe('About page', () => {
     for (const paragraph of ABOUT.paragraphs) {
       expect(screen.getByText(paragraph)).toBeInTheDocument()
     }
+  })
+})
+
+describe('Contact page', () => {
+  it('renders the invite copy and the mailto form', () => {
+    renderApp('/contact')
+
+    expect(screen.getByText(CONTACT_INTRO.eyebrow)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: CONTACT_INTRO.title })).toBeInTheDocument()
+    expect(screen.getByText(CONTACT_INTRO.support)).toBeInTheDocument()
+    expect(screen.getByLabelText(/name/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/message/i)).toBeInTheDocument()
   })
 })
