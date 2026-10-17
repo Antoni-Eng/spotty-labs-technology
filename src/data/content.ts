@@ -9,6 +9,27 @@ export const HERO = {
   secondaryCta: 'View services',
 } as const
 
+export const HOME_TEASERS = [
+  {
+    id: 'services',
+    title: 'Services',
+    body: 'Websites, custom apps, AI, and teaching — four ways to build what’s next.',
+    href: '/services',
+  },
+  {
+    id: 'about',
+    title: 'About',
+    body: 'Named after a Dalmatian and a Labrador. Pattern and loyalty, in software.',
+    href: '/about',
+  },
+  {
+    id: 'contact',
+    title: 'Contact',
+    body: 'Tell us what you’re trying to make. We’ll write back.',
+    href: '/contact',
+  },
+] as const
+
 export const SERVICES = [
   {
     id: 'websites',

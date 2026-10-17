@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { BRAND, HERO } from '../data/content'
 import './Hero.css'
 
@@ -11,12 +12,12 @@ export function Hero() {
         <h2 className="hero__headline">{HERO.headline}</h2>
         <p className="hero__support">{HERO.support}</p>
         <div className="hero__actions">
-          <a className="hero__cta hero__cta--primary" href="#contact">
+          <Link className="hero__cta hero__cta--primary" to="/contact">
             {HERO.primaryCta}
-          </a>
-          <a className="hero__cta hero__cta--secondary" href="#services">
+          </Link>
+          <Link className="hero__cta hero__cta--secondary" to="/services">
             {HERO.secondaryCta}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

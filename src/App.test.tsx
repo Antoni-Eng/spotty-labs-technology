@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { BRAND } from './data/content'
+import { ABOUT, BRAND, HERO, HOME_TEASERS } from './data/content'
 import { renderApp } from './test/renderApp'
 
 let intersectionCallback: IntersectionObserverCallback
@@ -52,6 +52,34 @@ describe('Routes', () => {
   it('redirects unknown paths home', () => {
     renderApp('/nope')
     expect(screen.getByRole('heading', { level: 1, name: BRAND })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /send message/i })).not.toBeInTheDocument()
+  })
+})
+
+describe('Home', () => {
+  it('presents the brand, hero copy, route CTAs, and teasers', () => {
+    renderApp('/')
+
+    expect(screen.getByRole('heading', { level: 1, name: BRAND })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: HERO.headline })).toBeInTheDocument()
+    expect(screen.getByText(HERO.support)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: HERO.primaryCta })).toHaveAttribute('href', '/contact')
+    expect(screen.getByRole('link', { name: HERO.secondaryCta })).toHaveAttribute('href', '/services')
+
+    for (const teaser of HOME_TEASERS) {
+      expect(screen.getByRole('heading', { name: teaser.title })).toBeInTheDocument()
+      expect(screen.getByText(teaser.body)).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: `Read more about ${teaser.title}` })).toHaveAttribute(
+        'href',
+        teaser.href,
+      )
+    }
+  })
+
+  it('does not render the full about body or contact form on home', () => {
+    renderApp('/')
+
+    expect(screen.queryByText(ABOUT.body)).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /send message/i })).not.toBeInTheDocument()
   })
 })
