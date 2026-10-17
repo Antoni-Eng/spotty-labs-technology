@@ -15,7 +15,6 @@ export function Services() {
     >
       <div className="services__inner">
         <div className="services__intro">
-          <p className="services__eyebrow">What we build</p>
           <h2 id="services-title" className="services__title">
             Services
           </h2>

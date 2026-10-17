@@ -23,3 +23,22 @@ Implemented the Services section on `feature/spotty-labs-website`.
 ## Concerns
 
 - npm emits the existing `Unknown env config "devdir"` warning; it does not affect tests, lint, build, or the development server.
+
+---
+
+## Review fix (Important + Minor)
+
+**Changes:**
+- Removed `overflow: hidden` from `.services` so desktop `position: sticky` on `.services__intro` works against the viewport scroll container.
+- Removed hardcoded eyebrow copy (“What we build”) and unused `.services__eyebrow` styles.
+
+**Verification (post-fix):**
+
+```
+npm test
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+
+npm run build
+✓ built in 112ms
+```
