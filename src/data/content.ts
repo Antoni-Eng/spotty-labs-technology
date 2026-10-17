@@ -60,10 +60,10 @@ export const HOME_TEASERS = [
     href: '/about',
     image: {
       src: '/images/teaser-about.jpg',
-      alt: 'A person typing on a laptop in a dark room',
+      alt: 'Lines of code on a laptop screen in a dark editor',
       credit: {
-        name: 'Markus Spiske',
-        href: 'https://unsplash.com/photos/iar-afB0QQw',
+        name: 'Chris Ried',
+        href: 'https://unsplash.com/photos/ieic5Tq8YMk',
       },
     },
   },
