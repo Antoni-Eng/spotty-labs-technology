@@ -2,37 +2,49 @@
   position: relative;
   isolation: isolate;
   display: grid;
-  min-height: 100svh;
+  grid-template-areas:
+    'photo'
+    'copy';
+  min-height: auto;
   align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
   overflow: hidden;
-  padding: clamp(7rem, 14vh, 10rem) 1.25rem clamp(5rem, 10vh, 7rem);
+  padding: clamp(5.5rem, 10vh, 7.5rem) 1.25rem clamp(2.5rem, 6vh, 4.5rem);
   background:
     radial-gradient(circle at 78% 24%, rgb(61 224 255 / 0.1), transparent 30%),
     radial-gradient(circle at 15% 85%, rgb(255 255 255 / 0.045), transparent 25%),
     linear-gradient(145deg, #070a0f 15%, #0a1119 55%, #070a0f 100%);
 }
 
-.hero__photo {
-  position: absolute;
-  z-index: -2;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  filter: brightness(0.38) saturate(0.85);
+.hero__content {
+  position: relative;
+  z-index: 1;
+  grid-area: copy;
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
 }
 
-.hero::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgb(7 10 15 / 0.35), rgb(7 10 15 / 0.82)),
-    linear-gradient(90deg, rgb(7 10 15 / 0.55), transparent 55%),
-    rgb(61 224 255 / 0.08);
+.hero__photo {
+  grid-area: photo;
+  z-index: 1;
+  width: 100%;
+  height: min(46vh, 22rem);
+  object-fit: cover;
+  object-position: center 28%;
+  border: 1px solid rgb(242 245 248 / 0.12);
+  filter: brightness(0.92) saturate(1.05);
+}
+
+@media (min-width: 860px) {
+  .hero {
+    grid-template-areas: 'copy photo';
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+    padding-inline: max(1.25rem, calc((100vw - var(--max-width)) / 2));
+  }
+
+  .hero__photo {
+    height: min(72vh, 38rem);
+  }
 }
 
 .hero__grid,
@@ -66,15 +78,10 @@
   animation: spot-drift 18s ease-in-out infinite alternate;
 }
 
-.hero__content {
-  width: min(100%, var(--max-width));
-  margin: 0 auto;
-}
-
 .hero__brand {
   max-width: 11ch;
   margin: 0;
-  font-size: clamp(2rem, 10vw, 8rem);
+  font-size: clamp(2rem, 7vw, 5.75rem);
   font-weight: 800;
   letter-spacing: -0.065em;
   line-height: 0.82;

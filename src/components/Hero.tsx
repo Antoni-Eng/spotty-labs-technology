@@ -5,11 +5,6 @@ import './Hero.css'
 export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-brand">
-      <img
-        className="hero__photo"
-        src={HERO_IMAGE.src}
-        alt={HERO_IMAGE.alt}
-      />
       <div className="hero__grid" aria-hidden="true" />
       <div className="hero__spots" aria-hidden="true" />
       <div className="hero__content">
@@ -25,6 +20,11 @@ export function Hero() {
           </Link>
         </div>
       </div>
+      <img
+        className="hero__photo"
+        src={HERO_IMAGE.src}
+        alt={HERO_IMAGE.alt}
+      />
     </section>
   )
 }
