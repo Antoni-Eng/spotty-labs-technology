@@ -95,6 +95,16 @@ describe('Home', () => {
     expect(screen.queryByText(ABOUT.paragraphs[0])).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /send message/i })).not.toBeInTheDocument()
   })
+
+  it('shows the hero still and a photo on each teaser', () => {
+    renderApp('/')
+
+    expect(screen.getByRole('img', { name: HERO_IMAGE.alt })).toBeInTheDocument()
+
+    for (const teaser of HOME_TEASERS) {
+      expect(screen.getByRole('img', { name: teaser.image.alt })).toBeInTheDocument()
+    }
+  })
 })
 
 describe('Services page', () => {
