@@ -1,7 +1,7 @@
 import { act, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
-import { BRAND, HERO, SERVICES } from './data/content'
+import { ABOUT, BRAND, HERO, SERVICES } from './data/content'
 
 let intersectionCallback: IntersectionObserverCallback
 
@@ -42,7 +42,7 @@ describe('Nav and hero', () => {
   it('presents the brand, hero copy, and CTA destinations', () => {
     render(<App />)
 
-    expect(screen.getAllByText(BRAND)).toHaveLength(2)
+    expect(screen.getAllByText(BRAND)).toHaveLength(3)
     expect(
       screen.getByRole('heading', { level: 1, name: BRAND }),
     ).toBeInTheDocument()
@@ -81,5 +81,29 @@ describe('Services', () => {
     })
 
     expect(serviceItems.every((item) => item?.classList.contains('is-visible'))).toBe(true)
+  })
+})
+
+describe('About and footer', () => {
+  it('renders the origin story as one heading and one paragraph', () => {
+    render(<App />)
+
+    const about = document.querySelector('#about')
+
+    expect(about).toBeInTheDocument()
+    expect(about?.querySelectorAll('h2')).toHaveLength(1)
+    expect(about?.querySelectorAll('p')).toHaveLength(1)
+    expect(screen.getByRole('heading', { level: 2, name: ABOUT.title })).toBeInTheDocument()
+    expect(screen.getByText(ABOUT.body)).toBeInTheDocument()
+  })
+
+  it('renders the brand and current year in the footer while retaining contact target', () => {
+    render(<App />)
+
+    const footer = screen.getByRole('contentinfo')
+
+    expect(footer).toHaveTextContent(BRAND)
+    expect(footer).toHaveTextContent(`© ${new Date().getFullYear()}`)
+    expect(document.querySelector('#contact')).toBeInTheDocument()
   })
 })
