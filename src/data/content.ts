@@ -23,7 +23,7 @@ export const HERO_IMAGE = {
 
 export const ABOUT_IMAGE = {
   src: '/images/about-workshop.jpg',
-  alt: 'Someone working at a laptop in a teaching workspace',
+  alt: 'Three people working at laptops in a teaching workspace',
   credit: {
     name: 'Brooke Cagle',
     href: 'https://unsplash.com/photos/g1Kr4Ozfoac',
@@ -74,10 +74,10 @@ export const HOME_TEASERS = [
     href: '/contact',
     image: {
       src: '/images/teaser-contact.jpg',
-      alt: 'A blank notebook and pen on a dark surface',
+      alt: 'A fountain pen writing on light lined paper with handwriting',
       credit: {
         name: 'Aaron Burden',
-        href: 'https://unsplash.com/photos/pVWU-CSxqx0',
+        href: 'https://unsplash.com/photos/CKlHKtCJZKk',
       },
     },
   },
