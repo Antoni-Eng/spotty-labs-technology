@@ -25,8 +25,8 @@ export const ABOUT_IMAGE = {
   src: '/images/about-workshop.jpg',
   alt: 'Someone working at a laptop in a teaching workspace',
   credit: {
-    name: 'Sigmund',
-    href: 'https://unsplash.com/photos/Zi0GmYPm88M',
+    name: 'Brooke Cagle',
+    href: 'https://unsplash.com/photos/g1Kr4Ozfoac',
   },
 } as const satisfies MediaRef
 
@@ -62,8 +62,8 @@ export const HOME_TEASERS = [
       src: '/images/teaser-about.jpg',
       alt: 'A person typing on a laptop in a dark room',
       credit: {
-        name: 'Unsplash',
-        href: 'https://unsplash.com/photos/zxhzpAXY58Y',
+        name: 'Markus Spiske',
+        href: 'https://unsplash.com/photos/iar-afB0QQw',
       },
     },
   },
@@ -76,8 +76,8 @@ export const HOME_TEASERS = [
       src: '/images/teaser-contact.jpg',
       alt: 'A blank notebook and pen on a dark surface',
       credit: {
-        name: 'Kelly Sikkema',
-        href: 'https://unsplash.com/photos/XH0VCNKhEkM',
+        name: 'Aaron Burden',
+        href: 'https://unsplash.com/photos/pVWU-CSxqx0',
       },
     },
   },

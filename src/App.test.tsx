@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs'
+import path from 'node:path'
 import { act, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
@@ -165,5 +167,14 @@ describe('Media data', () => {
 
     expect(MEDIA_CREDITS.length).toBeGreaterThan(0)
     expect(new Set(MEDIA_CREDITS.map((credit) => credit.href)).size).toBe(MEDIA_CREDITS.length)
+  })
+
+  it('maps every still src to a file under public/', () => {
+    const stills = [HERO_IMAGE, ABOUT_IMAGE, ...HOME_TEASERS.map((teaser) => teaser.image)]
+
+    for (const still of stills) {
+      const filePath = path.join(process.cwd(), 'public', still.src)
+      expect(existsSync(filePath)).toBe(true)
+    }
   })
 })
