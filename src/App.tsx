@@ -1,11 +1,14 @@
-import { BRAND } from './data/content'
+import { Nav } from './components/Nav'
+import { Hero } from './components/Hero'
+import './App.css'
 
-function App() {
+export default function App() {
   return (
-    <main>
-      <h1>{BRAND}</h1>
-    </main>
+    <div id="top" className="app">
+      <Nav />
+      <main>
+        <Hero />
+      </main>
+    </div>
   )
 }
-
-export default App
