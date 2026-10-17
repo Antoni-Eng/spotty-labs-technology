@@ -1,7 +1,24 @@
-import { render, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { act, render, screen } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
-import { BRAND, HERO } from './data/content'
+import { BRAND, HERO, SERVICES } from './data/content'
+
+let intersectionCallback: IntersectionObserverCallback
+
+class MockIntersectionObserver {
+  constructor(callback: IntersectionObserverCallback) {
+    intersectionCallback = callback
+  }
+
+  disconnect = vi.fn()
+  observe = vi.fn()
+  takeRecords = vi.fn(() => [])
+  unobserve = vi.fn()
+}
+
+beforeEach(() => {
+  vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
+})
 
 describe('Nav and hero', () => {
   it('renders the primary navigation with section links', () => {
@@ -39,5 +56,30 @@ describe('Nav and hero', () => {
       'href',
       '#services',
     )
+  })
+})
+
+describe('Services', () => {
+  it('renders every service and reveals them when the section enters view', () => {
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 2, name: 'Services' })).toBeInTheDocument()
+
+    const serviceItems = SERVICES.map((service) => {
+      expect(screen.getByRole('heading', { level: 3, name: service.title })).toBeInTheDocument()
+      expect(screen.getByText(service.description)).toBeInTheDocument()
+      return screen.getByRole('heading', { level: 3, name: service.title }).closest('article')
+    })
+
+    expect(serviceItems.every((item) => !item?.classList.contains('is-visible'))).toBe(true)
+
+    act(() => {
+      intersectionCallback(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver,
+      )
+    })
+
+    expect(serviceItems.every((item) => item?.classList.contains('is-visible'))).toBe(true)
   })
 })

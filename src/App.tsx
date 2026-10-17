@@ -1,5 +1,6 @@
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
+import { Services } from './components/Services'
 import './App.css'
 
 export default function App() {
@@ -8,7 +9,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <section id="services" className="app__section-target" aria-label="Services" />
+        <Services />
         <section id="about" className="app__section-target" aria-label="About" />
         <section id="contact" className="app__section-target" aria-label="Contact" />
       </main>
