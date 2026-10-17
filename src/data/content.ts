@@ -1,6 +1,35 @@
 export const BRAND = 'Spotty Labs Technology'
 export const CONTACT_EMAIL = 'hello@spottylabs.tech'
 
+export type MediaCredit = {
+  name: string
+  href: string
+}
+
+export type MediaRef = {
+  src: string
+  alt: string
+  credit: MediaCredit
+}
+
+export const HERO_IMAGE = {
+  src: '/images/hero-craft.jpg',
+  alt: 'Hands typing on a laptop with code on the screen',
+  credit: {
+    name: 'Rahul Mishra',
+    href: 'https://unsplash.com/photos/Bn4L8oSTIjc',
+  },
+} as const satisfies MediaRef
+
+export const ABOUT_IMAGE = {
+  src: '/images/about-workshop.jpg',
+  alt: 'Someone working at a laptop in a teaching workspace',
+  credit: {
+    name: 'Sigmund',
+    href: 'https://unsplash.com/photos/Zi0GmYPm88M',
+  },
+} as const satisfies MediaRef
+
 export const HERO = {
   headline: 'Build what’s next.',
   support:
@@ -15,20 +44,53 @@ export const HOME_TEASERS = [
     title: 'Services',
     body: 'Websites, custom apps, AI, and teaching — four ways to build what’s next.',
     href: '/services',
+    image: {
+      src: '/images/teaser-services.jpg',
+      alt: 'A person coding on a laptop at night',
+      credit: {
+        name: 'Chirayu Trivedi',
+        href: 'https://unsplash.com/photos/M1yPeeHZ08w',
+      },
+    },
   },
   {
     id: 'about',
     title: 'About',
     body: 'Named after a Dalmatian and a Labrador. Pattern and loyalty, in software.',
     href: '/about',
+    image: {
+      src: '/images/teaser-about.jpg',
+      alt: 'A person typing on a laptop in a dark room',
+      credit: {
+        name: 'Unsplash',
+        href: 'https://unsplash.com/photos/zxhzpAXY58Y',
+      },
+    },
   },
   {
     id: 'contact',
     title: 'Contact',
     body: 'Tell us what you’re trying to make. We’ll write back.',
     href: '/contact',
+    image: {
+      src: '/images/teaser-contact.jpg',
+      alt: 'A blank notebook and pen on a dark surface',
+      credit: {
+        name: 'Kelly Sikkema',
+        href: 'https://unsplash.com/photos/XH0VCNKhEkM',
+      },
+    },
   },
 ] as const
+
+export const MEDIA_CREDITS: readonly MediaCredit[] = [
+  HERO_IMAGE.credit,
+  ABOUT_IMAGE.credit,
+  ...HOME_TEASERS.map((teaser) => teaser.image.credit),
+].filter(
+  (credit, index, credits) =>
+    credits.findIndex((entry) => entry.href === credit.href) === index,
+)
 
 export const SERVICES_INTRO = 'What we make and teach. Four specialties, one lab.'
 

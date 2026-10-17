@@ -1,6 +1,17 @@
 import { act, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { ABOUT, BRAND, CONTACT_INTRO, HERO, HOME_TEASERS, SERVICES, SERVICES_INTRO } from './data/content'
+import {
+  ABOUT,
+  ABOUT_IMAGE,
+  BRAND,
+  CONTACT_INTRO,
+  HERO,
+  HERO_IMAGE,
+  HOME_TEASERS,
+  MEDIA_CREDITS,
+  SERVICES,
+  SERVICES_INTRO,
+} from './data/content'
 import { renderApp } from './test/renderApp'
 
 let intersectionCallback: IntersectionObserverCallback
@@ -137,5 +148,22 @@ describe('Contact page', () => {
     expect(screen.getByLabelText(/name/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/message/i)).toBeInTheDocument()
+  })
+})
+
+describe('Media data', () => {
+  it('points every still at a local public image with a credit', () => {
+    const stills = [HERO_IMAGE, ABOUT_IMAGE, ...HOME_TEASERS.map((teaser) => teaser.image)]
+
+    for (const still of stills) {
+      expect(still.src.startsWith('/images/')).toBe(true)
+      expect(still.src.endsWith('.jpg')).toBe(true)
+      expect(still.alt.length).toBeGreaterThan(8)
+      expect(still.credit.name.length).toBeGreaterThan(2)
+      expect(still.credit.href).toMatch(/^https:\/\/unsplash\.com\//)
+    }
+
+    expect(MEDIA_CREDITS.length).toBeGreaterThan(0)
+    expect(new Set(MEDIA_CREDITS.map((credit) => credit.href)).size).toBe(MEDIA_CREDITS.length)
   })
 })
