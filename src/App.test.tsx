@@ -131,6 +131,11 @@ describe('Services page', () => {
 
     expect(serviceItems.every((item) => item?.classList.contains('is-visible'))).toBe(true)
   })
+
+  it('marks each specialty with an original icon', () => {
+    renderApp('/services')
+    expect(document.querySelectorAll('.services__icon svg')).toHaveLength(SERVICES.length)
+  })
 })
 
 describe('About page', () => {

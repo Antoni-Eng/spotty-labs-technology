@@ -52,6 +52,22 @@
   transform: translateY(0);
 }
 
+.services__mark {
+  display: grid;
+  justify-items: start;
+  gap: 0.55rem;
+}
+
+.services__icon {
+  color: var(--color-accent);
+}
+
+.services__icon svg {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .services__number {
   padding-top: 0.35rem;
   color: var(--color-accent);

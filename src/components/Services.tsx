@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 import { SERVICES, SERVICES_INTRO } from '../data/content'
 import { useInView } from '../hooks/useInView'
+import { ServiceIcon } from './ServiceIcon'
 import './Services.css'
 
 export function Services() {
@@ -28,9 +29,12 @@ export function Services() {
               className={`services__item${inView ? ' is-visible' : ''}`}
               style={{ '--reveal-delay': `${index * 100}ms` } as CSSProperties}
             >
-              <span className="services__number" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
+              <div className="services__mark">
+                <ServiceIcon name={service.id} />
+                <span className="services__number" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              </div>
               <div>
                 <h3 className="services__item-title">{service.title}</h3>
                 <p className="services__description">{service.blurb}</p>
