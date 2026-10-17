@@ -1,0 +1,100 @@
+.contact {
+  padding: var(--space-section) 1.25rem;
+  background:
+    radial-gradient(circle at 82% 20%, rgb(61 224 255 / 0.09), transparent 28%),
+    var(--color-base);
+}
+
+.contact__inner {
+  display: grid;
+  width: min(100%, var(--max-width));
+  gap: clamp(2rem, 6vw, 5rem);
+  margin: 0 auto;
+}
+
+.contact__eyebrow {
+  margin: 0 0 1rem;
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact__title {
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  line-height: 0.98;
+}
+
+.contact__form {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgb(242 245 248 / 0.14);
+  background: rgb(242 245 248 / 0.035);
+}
+
+.contact__field {
+  display: grid;
+  gap: 0.55rem;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact__field input,
+.contact__field textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgb(242 245 248 / 0.28);
+  border-radius: 0;
+  padding: 0.8rem 0;
+  color: var(--color-text);
+  background: transparent;
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: normal;
+  outline: none;
+  resize: vertical;
+  text-transform: none;
+  transition: border-color 180ms ease;
+}
+
+.contact__field input:focus,
+.contact__field textarea:focus {
+  border-color: var(--color-accent);
+}
+
+.contact__error {
+  margin: 0;
+  color: #ff9b9b;
+  font-size: 0.9rem;
+}
+
+.contact__submit {
+  min-height: 3rem;
+  justify-self: start;
+  border: 1px solid var(--color-accent);
+  padding: 0.75rem 1.35rem;
+  color: var(--color-base);
+  background: var(--color-accent);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.contact__submit:hover {
+  background: #9af0ff;
+}
+
+@media (min-width: 800px) {
+  .contact__inner {
+    grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr);
+    align-items: start;
+  }
+}
