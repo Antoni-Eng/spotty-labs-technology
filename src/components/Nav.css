@@ -43,6 +43,10 @@
   color: var(--color-accent);
 }
 
+.nav__links a[aria-current="page"] {
+  color: var(--color-text);
+}
+
 @media (max-width: 520px) {
   .nav {
     flex-wrap: wrap;

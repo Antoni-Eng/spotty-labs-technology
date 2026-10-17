@@ -1,7 +1,7 @@
-import { act, render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import App from './App'
-import { ABOUT, BRAND, HERO, SERVICES } from './data/content'
+import { BRAND } from './data/content'
+import { renderApp } from './test/renderApp'
 
 let intersectionCallback: IntersectionObserverCallback
 
@@ -20,90 +20,38 @@ beforeEach(() => {
   vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
 })
 
-describe('Nav and hero', () => {
-  it('renders the primary navigation with section links', () => {
-    render(<App />)
+describe('Nav', () => {
+  it('renders path links and marks the current page', () => {
+    renderApp('/about')
 
     expect(screen.getByRole('navigation', { name: 'Primary' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Services' })).toHaveAttribute(
-      'href',
-      '#services',
-    )
-    expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute(
-      'href',
-      '#about',
-    )
-    expect(screen.getByRole('link', { name: 'Contact' })).toHaveAttribute(
-      'href',
-      '#contact',
-    )
-  })
-
-  it('presents the brand, hero copy, and CTA destinations', () => {
-    render(<App />)
-
-    expect(screen.getAllByText(BRAND)).toHaveLength(3)
-    expect(
-      screen.getByRole('heading', { level: 1, name: BRAND }),
-    ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { level: 2, name: HERO.headline })).toBeInTheDocument()
-    expect(screen.getByText(HERO.support)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: HERO.primaryCta })).toHaveAttribute(
-      'href',
-      '#contact',
-    )
-    expect(screen.getByRole('link', { name: HERO.secondaryCta })).toHaveAttribute(
-      'href',
-      '#services',
-    )
+    expect(screen.getByRole('link', { name: BRAND })).toHaveAttribute('href', '/')
+    expect(screen.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/services')
+    expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about')
+    expect(screen.getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact')
+    expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page')
   })
 })
 
-describe('Services', () => {
-  it('renders every service and reveals them when the section enters view', () => {
-    render(<App />)
-
+describe('Routes', () => {
+  it('renders the services heading on /services', () => {
+    renderApp('/services')
     expect(screen.getByRole('heading', { level: 2, name: 'Services' })).toBeInTheDocument()
-
-    const serviceItems = SERVICES.map((service) => {
-      expect(screen.getByRole('heading', { level: 3, name: service.title })).toBeInTheDocument()
-      expect(screen.getByText(service.description)).toBeInTheDocument()
-      return screen.getByRole('heading', { level: 3, name: service.title }).closest('article')
-    })
-
-    expect(serviceItems.every((item) => !item?.classList.contains('is-visible'))).toBe(true)
-
-    act(() => {
-      intersectionCallback(
-        [{ isIntersecting: true } as IntersectionObserverEntry],
-        {} as IntersectionObserver,
-      )
-    })
-
-    expect(serviceItems.every((item) => item?.classList.contains('is-visible'))).toBe(true)
-  })
-})
-
-describe('About and footer', () => {
-  it('renders the origin story as one heading and one paragraph', () => {
-    render(<App />)
-
-    const about = document.querySelector('#about')
-
-    expect(about).toBeInTheDocument()
-    expect(about?.querySelectorAll('h2')).toHaveLength(1)
-    expect(about?.querySelectorAll('p')).toHaveLength(1)
-    expect(screen.getByRole('heading', { level: 2, name: ABOUT.title })).toBeInTheDocument()
-    expect(screen.getByText(ABOUT.body)).toBeInTheDocument()
   })
 
-  it('renders the brand and current year in the footer while retaining contact target', () => {
-    render(<App />)
+  it('renders the about title on /about', () => {
+    renderApp('/about')
+    expect(screen.getByRole('heading', { level: 2, name: 'About the lab' })).toBeInTheDocument()
+  })
 
-    const footer = screen.getByRole('contentinfo')
+  it('renders the contact form on /contact', () => {
+    renderApp('/contact')
+    expect(screen.getByRole('button', { name: /send message/i })).toBeInTheDocument()
+  })
 
-    expect(footer).toHaveTextContent(BRAND)
-    expect(footer).toHaveTextContent(`© ${new Date().getFullYear()}`)
-    expect(document.querySelector('#contact')).toBeInTheDocument()
+  it('redirects unknown paths home', () => {
+    renderApp('/nope')
+    expect(screen.getByRole('heading', { level: 1, name: BRAND })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /send message/i })).not.toBeInTheDocument()
   })
 })
