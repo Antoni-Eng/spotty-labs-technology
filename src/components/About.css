@@ -23,12 +23,21 @@
   font-weight: 700;
 }
 
+.about__copy {
+  display: grid;
+  gap: 1.25rem;
+}
+
 .about__body {
   max-width: 42rem;
   margin: 0;
   color: var(--color-muted);
   font-size: clamp(1.15rem, 2.2vw, 1.55rem);
   line-height: 1.65;
+}
+
+.about__body + .about__body {
+  margin-top: 0;
 }
 
 @media (min-width: 800px) {

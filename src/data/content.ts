@@ -65,5 +65,9 @@ export const SERVICES = [
 
 export const ABOUT = {
   title: 'About the lab',
-  body: 'Spotty Labs Technology is named after two dogs — a Dalmatian and a Labrador. That mix of pattern and loyalty shows up in the work: careful craft, modern tech, and teaching that sticks.',
+  paragraphs: [
+    'Spotty Labs Technology is named after two dogs — a Dalmatian and a Labrador. One for pattern, one for loyalty. The name stuck because it described the work we wanted to do.',
+    'Careful craft and modern tech belong together. We design and build websites, custom applications, and AI integrations that stay understandable after launch.',
+    'Teaching is part of the same job. Computer education here means sitting with the problem until it is clear enough to pass on — so the skill stays with you, not with the lab.',
+  ],
 } as const

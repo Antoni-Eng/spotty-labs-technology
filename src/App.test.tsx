@@ -79,7 +79,7 @@ describe('Home', () => {
   it('does not render the full about body or contact form on home', () => {
     renderApp('/')
 
-    expect(screen.queryByText(ABOUT.body)).not.toBeInTheDocument()
+    expect(screen.queryByText(ABOUT.paragraphs[0])).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /send message/i })).not.toBeInTheDocument()
   })
 })
@@ -107,5 +107,22 @@ describe('Services page', () => {
     })
 
     expect(serviceItems.every((item) => item?.classList.contains('is-visible'))).toBe(true)
+  })
+})
+
+describe('About page', () => {
+  it('renders the origin story as one heading and multiple paragraphs', () => {
+    renderApp('/about')
+
+    const about = document.querySelector('#about')
+
+    expect(about).toBeInTheDocument()
+    expect(about?.querySelectorAll('h2')).toHaveLength(1)
+    expect(about?.querySelectorAll('p')).toHaveLength(ABOUT.paragraphs.length)
+    expect(screen.getByRole('heading', { level: 2, name: ABOUT.title })).toBeInTheDocument()
+
+    for (const paragraph of ABOUT.paragraphs) {
+      expect(screen.getByText(paragraph)).toBeInTheDocument()
+    }
   })
 })

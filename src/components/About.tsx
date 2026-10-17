@@ -12,7 +12,13 @@ export function About() {
         <h2 id="about-title" className="about__title">
           {ABOUT.title}
         </h2>
-        <p className="about__body">{ABOUT.body}</p>
+        <div className="about__copy">
+          {ABOUT.paragraphs.map((paragraph) => (
+            <p key={paragraph} className="about__body">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </div>
     </section>
   )
