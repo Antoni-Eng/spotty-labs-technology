@@ -1,4 +1,7 @@
 .app {
   min-height: 100vh;
-  overflow: clip;
+}
+
+.app__section-target {
+  scroll-margin-top: 4.5rem;
 }
