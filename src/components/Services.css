@@ -23,6 +23,13 @@
   font-weight: 700;
 }
 
+.services__lead {
+  max-width: 18rem;
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
+
 .services__list {
   border-top: 1px solid rgb(242 245 248 / 0.16);
 }

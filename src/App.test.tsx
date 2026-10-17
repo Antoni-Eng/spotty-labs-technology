@@ -1,6 +1,6 @@
-import { screen } from '@testing-library/react'
+import { act, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { ABOUT, BRAND, HERO, HOME_TEASERS } from './data/content'
+import { ABOUT, BRAND, HERO, HOME_TEASERS, SERVICES, SERVICES_INTRO } from './data/content'
 import { renderApp } from './test/renderApp'
 
 let intersectionCallback: IntersectionObserverCallback
@@ -81,5 +81,31 @@ describe('Home', () => {
 
     expect(screen.queryByText(ABOUT.body)).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /send message/i })).not.toBeInTheDocument()
+  })
+})
+
+describe('Services page', () => {
+  it('renders the intro and every specialty blurb, then reveals items', () => {
+    renderApp('/services')
+
+    expect(screen.getByRole('heading', { level: 2, name: 'Services' })).toBeInTheDocument()
+    expect(screen.getByText(SERVICES_INTRO)).toBeInTheDocument()
+
+    const serviceItems = SERVICES.map((service) => {
+      expect(screen.getByRole('heading', { level: 3, name: service.title })).toBeInTheDocument()
+      expect(screen.getByText(service.blurb)).toBeInTheDocument()
+      return screen.getByRole('heading', { level: 3, name: service.title }).closest('article')
+    })
+
+    expect(serviceItems.every((item) => !item?.classList.contains('is-visible'))).toBe(true)
+
+    act(() => {
+      intersectionCallback(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver,
+      )
+    })
+
+    expect(serviceItems.every((item) => item?.classList.contains('is-visible'))).toBe(true)
   })
 })

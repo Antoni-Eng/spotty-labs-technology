@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { SERVICES } from '../data/content'
+import { SERVICES, SERVICES_INTRO } from '../data/content'
 import { useInView } from '../hooks/useInView'
 import './Services.css'
 
@@ -18,6 +18,7 @@ export function Services() {
           <h2 id="services-title" className="services__title">
             Services
           </h2>
+          <p className="services__lead">{SERVICES_INTRO}</p>
         </div>
 
         <div className="services__list">
@@ -32,7 +33,7 @@ export function Services() {
               </span>
               <div>
                 <h3 className="services__item-title">{service.title}</h3>
-                <p className="services__description">{service.description}</p>
+                <p className="services__description">{service.blurb}</p>
               </div>
             </article>
           ))}
