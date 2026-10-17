@@ -1,9 +1,18 @@
+import { readFileSync } from 'node:fs'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { Contact } from './Contact'
 
 describe('Contact', () => {
+  it('provides a strong cyan focus-visible treatment for form fields', () => {
+    const styles = readFileSync('src/components/Contact.css', 'utf8')
+
+    expect(styles).toMatch(
+      /\.contact__field input:focus-visible,\s*\.contact__field textarea:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--color-accent\);[^}]*outline-offset:\s*3px;/s,
+    )
+  })
+
   it('shows validation and does not navigate when required fields are blank', async () => {
     const user = userEvent.setup()
     const navigate = vi.fn()

@@ -69,6 +69,12 @@
   border-color: var(--color-accent);
 }
 
+.contact__field input:focus-visible,
+.contact__field textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 .contact__error {
   margin: 0;
   color: #ff9b9b;
