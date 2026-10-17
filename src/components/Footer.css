@@ -1,5 +1,6 @@
 .footer {
   display: flex;
+  flex-wrap: wrap;
   width: min(calc(100% - 2.5rem), var(--max-width));
   align-items: center;
   justify-content: space-between;
@@ -9,6 +10,17 @@
   border-top: 1px solid rgb(242 245 248 / 0.16);
   color: var(--color-muted);
   font-size: 0.85rem;
+}
+
+.footer__credits {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 0.75rem;
+}
+
+.footer__credits a {
+  color: inherit;
+  text-underline-offset: 0.15em;
 }
 
 .footer__brand,

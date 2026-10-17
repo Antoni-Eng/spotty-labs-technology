@@ -40,9 +40,23 @@
   margin-top: 0;
 }
 
+.about__photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: brightness(0.78) saturate(0.9);
+}
+
 @media (min-width: 800px) {
   .about__inner {
     grid-template-columns: minmax(14rem, 0.85fr) minmax(0, 1.15fr);
+    grid-template-areas:
+      'title photo'
+      'copy photo';
     align-items: start;
   }
+
+  .about__title { grid-area: title; }
+  .about__copy { grid-area: copy; }
+  .about__photo { grid-area: photo; }
 }

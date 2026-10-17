@@ -152,6 +152,20 @@ describe('About page', () => {
     for (const paragraph of ABOUT.paragraphs) {
       expect(screen.getByText(paragraph)).toBeInTheDocument()
     }
+
+    expect(screen.getByRole('img', { name: ABOUT_IMAGE.alt })).toBeInTheDocument()
+  })
+})
+
+describe('Footer credits', () => {
+  it('credits Unsplash photographers', () => {
+    renderApp('/')
+
+    const footer = screen.getByRole('contentinfo')
+    expect(footer).toHaveTextContent(BRAND)
+    expect(footer).toHaveTextContent(`© ${new Date().getFullYear()}`)
+    expect(footer).toHaveTextContent('Unsplash')
+    expect(footer).toHaveTextContent('Photos:')
   })
 })
 

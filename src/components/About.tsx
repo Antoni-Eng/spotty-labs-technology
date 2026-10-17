@@ -1,4 +1,4 @@
-import { ABOUT } from '../data/content'
+import { ABOUT, ABOUT_IMAGE } from '../data/content'
 import './About.css'
 
 export function About() {
@@ -19,6 +19,11 @@ export function About() {
             </p>
           ))}
         </div>
+        <img
+          className="about__photo"
+          src={ABOUT_IMAGE.src}
+          alt={ABOUT_IMAGE.alt}
+        />
       </div>
     </section>
   )
